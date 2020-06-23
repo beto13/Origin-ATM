@@ -45,7 +45,7 @@
             this.Pantalla = new System.Windows.Forms.TabControl();
             this.Home = new System.Windows.Forms.TabPage();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.lblError = new System.Windows.Forms.Label();
+            this.lblHora = new System.Windows.Forms.Label();
             this.txtNumeroTarjeta = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -54,7 +54,6 @@
             this.btnPinSalir = new System.Windows.Forms.Button();
             this.btnPinLimpiar = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.lblPinError = new System.Windows.Forms.Label();
             this.txtPin = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.Operaciones = new System.Windows.Forms.TabPage();
@@ -75,7 +74,7 @@
             this.btnRetiroAceptar = new System.Windows.Forms.Button();
             this.btnRetiroSalir = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.lblRetirarError = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.txtMonto = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.btnRetiroLimpiar = new System.Windows.Forms.Button();
@@ -90,9 +89,12 @@
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
-            this.lblHora = new System.Windows.Forms.Label();
             this.timer = new System.Windows.Forms.Timer(this.components);
-            this.label2 = new System.Windows.Forms.Label();
+            this.Error = new System.Windows.Forms.TabPage();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.lblError = new System.Windows.Forms.Label();
+            this.btnErrorAtras = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
             this.groupBox2.SuspendLayout();
             this.Pantalla.SuspendLayout();
             this.Home.SuspendLayout();
@@ -106,6 +108,8 @@
             this.groupBox1.SuspendLayout();
             this.Resumen.SuspendLayout();
             this.groupBox5.SuspendLayout();
+            this.Error.SuspendLayout();
+            this.groupBox6.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox2
@@ -281,6 +285,7 @@
             this.Pantalla.Controls.Add(this.Balance);
             this.Pantalla.Controls.Add(this.Retiro);
             this.Pantalla.Controls.Add(this.Resumen);
+            this.Pantalla.Controls.Add(this.Error);
             this.Pantalla.Location = new System.Drawing.Point(19, 15);
             this.Pantalla.Name = "Pantalla";
             this.Pantalla.SelectedIndex = 0;
@@ -304,7 +309,6 @@
             // 
             this.groupBox3.BackColor = System.Drawing.SystemColors.Window;
             this.groupBox3.Controls.Add(this.lblHora);
-            this.groupBox3.Controls.Add(this.lblError);
             this.groupBox3.Controls.Add(this.txtNumeroTarjeta);
             this.groupBox3.Controls.Add(this.label8);
             this.groupBox3.Controls.Add(this.label7);
@@ -315,15 +319,15 @@
             this.groupBox3.TabIndex = 18;
             this.groupBox3.TabStop = false;
             // 
-            // lblError
+            // lblHora
             // 
-            this.lblError.AutoSize = true;
-            this.lblError.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblError.ForeColor = System.Drawing.Color.Red;
-            this.lblError.Location = new System.Drawing.Point(27, 240);
-            this.lblError.Name = "lblError";
-            this.lblError.Size = new System.Drawing.Size(0, 24);
-            this.lblError.TabIndex = 18;
+            this.lblHora.AutoSize = true;
+            this.lblHora.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblHora.Location = new System.Drawing.Point(248, 15);
+            this.lblHora.Name = "lblHora";
+            this.lblHora.Size = new System.Drawing.Size(80, 24);
+            this.lblHora.TabIndex = 19;
+            this.lblHora.Text = "00:00:00";
             // 
             // txtNumeroTarjeta
             // 
@@ -360,6 +364,7 @@
             // 
             // Pin
             // 
+            this.Pin.BackColor = System.Drawing.Color.SlateGray;
             this.Pin.Controls.Add(this.btnPinAceptar);
             this.Pin.Controls.Add(this.btnPinSalir);
             this.Pin.Controls.Add(this.btnPinLimpiar);
@@ -370,7 +375,6 @@
             this.Pin.Size = new System.Drawing.Size(592, 349);
             this.Pin.TabIndex = 1;
             this.Pin.Text = "Pin";
-            this.Pin.UseVisualStyleBackColor = true;
             // 
             // btnPinAceptar
             // 
@@ -407,7 +411,7 @@
             // 
             // groupBox4
             // 
-            this.groupBox4.Controls.Add(this.lblPinError);
+            this.groupBox4.BackColor = System.Drawing.SystemColors.Window;
             this.groupBox4.Controls.Add(this.txtPin);
             this.groupBox4.Controls.Add(this.label9);
             this.groupBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -417,17 +421,6 @@
             this.groupBox4.Size = new System.Drawing.Size(350, 250);
             this.groupBox4.TabIndex = 19;
             this.groupBox4.TabStop = false;
-            // 
-            // lblPinError
-            // 
-            this.lblPinError.AutoSize = true;
-            this.lblPinError.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPinError.ForeColor = System.Drawing.Color.Red;
-            this.lblPinError.Location = new System.Drawing.Point(65, 177);
-            this.lblPinError.Name = "lblPinError";
-            this.lblPinError.Size = new System.Drawing.Size(0, 24);
-            this.lblPinError.TabIndex = 19;
-            this.lblPinError.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // txtPin
             // 
@@ -499,6 +492,7 @@
             // 
             // Balance
             // 
+            this.Balance.BackColor = System.Drawing.Color.SlateGray;
             this.Balance.Controls.Add(this.groupBox7);
             this.Balance.Controls.Add(this.btnBalanceSalir);
             this.Balance.Controls.Add(this.btnBalanceAtras);
@@ -507,10 +501,10 @@
             this.Balance.Size = new System.Drawing.Size(592, 349);
             this.Balance.TabIndex = 3;
             this.Balance.Text = "Balance";
-            this.Balance.UseVisualStyleBackColor = true;
             // 
             // groupBox7
             // 
+            this.groupBox7.BackColor = System.Drawing.SystemColors.Window;
             this.groupBox7.Controls.Add(this.lblBalanceSaldo);
             this.groupBox7.Controls.Add(this.label18);
             this.groupBox7.Controls.Add(this.lblBalanceFecha);
@@ -602,6 +596,7 @@
             // 
             // Retiro
             // 
+            this.Retiro.BackColor = System.Drawing.Color.SlateGray;
             this.Retiro.Controls.Add(this.btnRetiroAceptar);
             this.Retiro.Controls.Add(this.btnRetiroSalir);
             this.Retiro.Controls.Add(this.groupBox1);
@@ -611,7 +606,6 @@
             this.Retiro.Size = new System.Drawing.Size(592, 349);
             this.Retiro.TabIndex = 4;
             this.Retiro.Text = "Retiro";
-            this.Retiro.UseVisualStyleBackColor = true;
             // 
             // btnRetiroAceptar
             // 
@@ -637,8 +631,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.BackColor = System.Drawing.SystemColors.Window;
             this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.lblRetirarError);
             this.groupBox1.Controls.Add(this.txtMonto);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -648,15 +642,15 @@
             this.groupBox1.TabIndex = 19;
             this.groupBox1.TabStop = false;
             // 
-            // lblRetirarError
+            // label2
             // 
-            this.lblRetirarError.AutoSize = true;
-            this.lblRetirarError.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblRetirarError.ForeColor = System.Drawing.Color.Red;
-            this.lblRetirarError.Location = new System.Drawing.Point(30, 174);
-            this.lblRetirarError.Name = "lblRetirarError";
-            this.lblRetirarError.Size = new System.Drawing.Size(0, 24);
-            this.lblRetirarError.TabIndex = 18;
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(286, 139);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(26, 29);
+            this.label2.TabIndex = 19;
+            this.label2.Text = "$";
             // 
             // txtMonto
             // 
@@ -693,6 +687,7 @@
             // 
             // Resumen
             // 
+            this.Resumen.BackColor = System.Drawing.Color.SlateGray;
             this.Resumen.Controls.Add(this.btnResumenSalir);
             this.Resumen.Controls.Add(this.groupBox5);
             this.Resumen.Location = new System.Drawing.Point(4, 22);
@@ -700,7 +695,6 @@
             this.Resumen.Size = new System.Drawing.Size(592, 349);
             this.Resumen.TabIndex = 5;
             this.Resumen.Text = "Resumen Operación";
-            this.Resumen.UseVisualStyleBackColor = true;
             // 
             // btnResumenSalir
             // 
@@ -715,6 +709,7 @@
             // 
             // groupBox5
             // 
+            this.groupBox5.BackColor = System.Drawing.SystemColors.Window;
             this.groupBox5.Controls.Add(this.lblMonto);
             this.groupBox5.Controls.Add(this.label19);
             this.groupBox5.Controls.Add(this.lblOperacion);
@@ -810,31 +805,64 @@
             this.label15.TabIndex = 15;
             this.label15.Text = "Id Tarjeta:";
             // 
-            // lblHora
-            // 
-            this.lblHora.AutoSize = true;
-            this.lblHora.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblHora.Location = new System.Drawing.Point(248, 15);
-            this.lblHora.Name = "lblHora";
-            this.lblHora.Size = new System.Drawing.Size(80, 24);
-            this.lblHora.TabIndex = 19;
-            this.lblHora.Text = "00:00:00";
-            // 
             // timer
             // 
             this.timer.Enabled = true;
             this.timer.Interval = 1000;
             this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
-            // label2
+            // Error
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(286, 139);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(26, 29);
-            this.label2.TabIndex = 19;
-            this.label2.Text = "$";
+            this.Error.Controls.Add(this.btnErrorAtras);
+            this.Error.Controls.Add(this.groupBox6);
+            this.Error.Location = new System.Drawing.Point(4, 22);
+            this.Error.Name = "Error";
+            this.Error.Size = new System.Drawing.Size(592, 349);
+            this.Error.TabIndex = 6;
+            this.Error.UseVisualStyleBackColor = true;
+            // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.label3);
+            this.groupBox6.Controls.Add(this.lblError);
+            this.groupBox6.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox6.Location = new System.Drawing.Point(121, 10);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(350, 250);
+            this.groupBox6.TabIndex = 20;
+            this.groupBox6.TabStop = false;
+            // 
+            // lblError
+            // 
+            this.lblError.AutoSize = true;
+            this.lblError.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblError.ForeColor = System.Drawing.Color.Red;
+            this.lblError.Location = new System.Drawing.Point(38, 138);
+            this.lblError.Name = "lblError";
+            this.lblError.Size = new System.Drawing.Size(0, 24);
+            this.lblError.TabIndex = 18;
+            // 
+            // btnErrorAtras
+            // 
+            this.btnErrorAtras.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnErrorAtras.Image = global::Presentacion.Properties.Resources.AtrasA;
+            this.btnErrorAtras.Location = new System.Drawing.Point(371, 275);
+            this.btnErrorAtras.Name = "btnErrorAtras";
+            this.btnErrorAtras.Size = new System.Drawing.Size(100, 60);
+            this.btnErrorAtras.TabIndex = 21;
+            this.btnErrorAtras.UseVisualStyleBackColor = true;
+            this.btnErrorAtras.Click += new System.EventHandler(this.btnErrorAtras_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.Red;
+            this.label3.Location = new System.Drawing.Point(38, 107);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(52, 24);
+            this.label3.TabIndex = 19;
+            this.label3.Text = "Error";
             // 
             // ATM
             // 
@@ -866,6 +894,9 @@
             this.Resumen.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
+            this.Error.ResumeLayout(false);
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -904,8 +935,6 @@
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.TextBox txtPin;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label lblError;
-        private System.Windows.Forms.Label lblPinError;
         private System.Windows.Forms.Label lblBalanceSaldo;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label lblBalanceFecha;
@@ -922,7 +951,6 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Label lblRetirarError;
         private System.Windows.Forms.TextBox txtMonto;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnRetiroAceptar;
@@ -935,5 +963,10 @@
         private System.Windows.Forms.Label lblHora;
         private System.Windows.Forms.Timer timer;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TabPage Error;
+        private System.Windows.Forms.Button btnErrorAtras;
+        private System.Windows.Forms.GroupBox groupBox6;
+        private System.Windows.Forms.Label lblError;
+        private System.Windows.Forms.Label label3;
     }
 }

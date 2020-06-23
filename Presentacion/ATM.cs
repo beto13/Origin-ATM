@@ -44,10 +44,6 @@ namespace Presentacion
 
         private void Pantalla_SelectedIndexChanged(object sender, EventArgs e)
         {
-            lblError.Text = "";
-            lblPinError.Text = "";
-            lblRetirarError.Text = "";
-
             foreach (TabPage item in Pantalla.TabPages)
             {
                 item.Text = "";
@@ -83,42 +79,21 @@ namespace Presentacion
             lblHora.Text = DateTime.Now.ToLongTimeString();
         }
 
-        private void Limpiar(int indice)
+        private void Limpiar()
         {
-            switch (indice)
-            {
-                case 0:
-                    txtNumeroTarjeta.Text = "";
-                    lblError.Text = "";
-                    break;
-
-                case 1:
-                    txtPin.Text = "";
-                    lblPinError.Text = "";
-                    break;
-
-                case 4:
-                    txtMonto.Text = "";
-                    lblRetirarError.Text = "";
-                    break;
-
-                default:
-                    lblError.Text = "";
-                    txtPin.Text = "";
-                    lblPinError.Text = "";
-                    txtNumeroTarjeta.Text = "";
-                    txtMonto.Text = "";
-                    objTarjeta = null;
-                    TarjetaValida = false;
-                    CambiarTap = false;
-                    PinValido = false;
-                    break;
-            }
+            lblError.Text = "";
+            txtPin.Text = "";
+            txtNumeroTarjeta.Text = "";
+            txtMonto.Text = "";
+            objTarjeta = null;
+            TarjetaValida = false;
+            CambiarTap = false;
+            PinValido = false;
         }
 
         private void Salir()
         {
-            Limpiar(9);
+            Limpiar();
             CambiarTap = true;
             Pantalla.SelectedIndex = 0;
             CambiarTap = false;
@@ -235,32 +210,39 @@ namespace Presentacion
         {
             if (Pantalla.SelectedIndex == 0)
             {
-                Limpiar(0);
+                  txtNumeroTarjeta.Text = "";
             }
         }
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-           string numeroTarjeta = txtNumeroTarjeta.Text.Replace("-", "");
-
-            if (numeroTarjeta.Length < 16)
+            if (Pantalla.SelectedIndex==0)
             {
-                lblError.Text = "El número debe tener 16 digitos.";
-            }
-            else
-            {
-                TarjetaAdm objAdmin = new TarjetaAdm();
-                objTarjeta = objAdmin.ValidarTarjeta(numeroTarjeta);
+                string numeroTarjeta = txtNumeroTarjeta.Text.Replace("-", "");
 
-                if (objTarjeta!=null)
+                if (numeroTarjeta.Length < 16)
                 {
-                    TarjetaValida = true;
-                    Limpiar(0);
-                    Avanzar(1);
+                    lblError.Text = "El número debe tener 16 digitos.";
+                    txtNumeroTarjeta.Text = "";
+                    Avanzar(6);
                 }
                 else
                 {
-                    lblError.Text = "Número de tarjeta inválido.";
+                    TarjetaAdm objAdmin = new TarjetaAdm();
+                    objTarjeta = objAdmin.ValidarTarjeta(numeroTarjeta);
+
+                    if (objTarjeta != null)
+                    {
+                        TarjetaValida = true;
+                        txtNumeroTarjeta.Text = "";
+                        Avanzar(1);
+                    }
+                    else
+                    {
+                        lblError.Text = "Número de tarjeta inválido.";
+                        txtNumeroTarjeta.Text = "";
+                        Avanzar(6);
+                    }
                 }
             }
         }
@@ -316,7 +298,9 @@ namespace Presentacion
             {
                 if (pin.Length < 4)
                 {
-                    lblPinError.Text = "El PIN debe tener 4 digitos.";
+                    lblError.Text = "El PIN debe tener 4 digitos.";
+                    txtPin.Text = "";
+                    Avanzar(5);
                 }
                 else
                 {
@@ -325,7 +309,7 @@ namespace Presentacion
                         if (objTarjeta.Pin==pin)
                         {
                             PinValido = true;
-                            Limpiar(1);
+                            txtPin.Text = "";;
                             Avanzar(1);
                         }
                         else
@@ -340,8 +324,9 @@ namespace Presentacion
                                     {
                                         objTarjeta = objAdm.BuscarTarjeta(idTarjeta);
                                     }
-                                    Limpiar(1);
-                                    lblPinError.Text = "PIN incorrecto.";
+                                    txtPin.Text = "";;
+                                    lblError.Text = "PIN incorrecto.";
+                                    Avanzar(5);
                                     break;
 
                                 case 1:
@@ -349,8 +334,9 @@ namespace Presentacion
                                     {
                                         objTarjeta = objAdm.BuscarTarjeta(idTarjeta);
                                     }
-                                    Limpiar(1);
-                                    lblPinError.Text = "PIN incorrecto.";
+                                    txtPin.Text = "";
+                                    lblError.Text = "PIN incorrecto.";
+                                    Avanzar(5);
                                     break;
 
                                 case 2:
@@ -358,8 +344,9 @@ namespace Presentacion
                                     {
                                         objTarjeta = objAdm.BuscarTarjeta(idTarjeta);
                                     }
-                                    Limpiar(1);
-                                    lblPinError.Text = "PIN incorrecto.";
+                                    txtPin.Text = "";;
+                                    lblError.Text = "PIN incorrecto.";
+                                    Avanzar(5);
                                     break;
 
                                 case 3:
@@ -367,8 +354,9 @@ namespace Presentacion
                                     {
                                         objTarjeta = objAdm.BuscarTarjeta(idTarjeta);
                                     }
-                                    Limpiar(9);
-                                    lblPinError.Text = "Tarjeta Bloqueda.";
+                                    Limpiar();
+                                    lblError.Text = "Tarjeta Bloqueda.";
+                                    Avanzar(5);
                                     break;
 
                                 default:
@@ -382,7 +370,7 @@ namespace Presentacion
 
         private void btnPinLimpiar_Click(object sender, EventArgs e)
         {
-            Limpiar(1);
+            txtPin.Text = "";;
         }
 
         private void btnPinSalir_Click(object sender, EventArgs e)
@@ -394,66 +382,78 @@ namespace Presentacion
     #region "Retiro"
         private void btnRetiroAceptar_Click(object sender, EventArgs e)
         {
-            string entrada = txtMonto.Text.Replace(".","");
-            int monto = Convert.ToInt32(entrada);
-            int idOperacion = 0;
-
-            if (monto > 0)
+            if (txtMonto.Text != "")
             {
-                if (monto<=10000)
+                string entrada = txtMonto.Text.Replace(".", "");
+                int monto = Convert.ToInt32(entrada);
+                int idOperacion = 0;
+
+                if (monto > 0)
                 {
-                    if (monto % 500 == 0)
+                    if (monto <= 10000)
                     {
-                        if (monto <= objTarjeta.Saldo)
+                        if (monto % 500 == 0)
                         {
-                            TarjetaAdm objAdmin = new TarjetaAdm();
-
-                            idOperacion = objAdmin.Retirar(objTarjeta.IdTarjeta, monto);
-
-                            if (idOperacion > 0)
+                            if (monto <= objTarjeta.Saldo)
                             {
-                                OperacionAdm objAdm = new OperacionAdm();
-                                Operacion objOp = new Operacion();
-                                objOp = objAdm.ConsultarOperacion(idOperacion);
+                                TarjetaAdm objAdmin = new TarjetaAdm();
 
-                                if (objOp != null)
+                                idOperacion = objAdmin.Retirar(objTarjeta.IdTarjeta, monto);
+
+                                if (idOperacion > 0)
                                 {
-                                    lblFecha.Text = objOp.Fecha.ToString();
-                                    lblOperacion.Text = objOp.IdOperacion.ToString();
-                                    lblTarjeta.Text = objOp.IdTarjeta.ToString();
-                                    lblMonto.Text = objOp.Monto.ToString();
-                                    Avanzar(1);
+                                    OperacionAdm objAdm = new OperacionAdm();
+                                    Operacion objOp = new Operacion();
+                                    objOp = objAdm.ConsultarOperacion(idOperacion);
+
+                                    if (objOp != null)
+                                    {
+                                        lblFecha.Text = objOp.Fecha.ToString();
+                                        lblOperacion.Text = objOp.IdOperacion.ToString();
+                                        lblTarjeta.Text = objOp.IdTarjeta.ToString();
+                                        lblMonto.Text = objOp.Monto.ToString();
+                                        Avanzar(1);
+                                    }
                                 }
+                            }
+                            else
+                            {
+                                txtMonto.Text = "";
+                                lblError.Text = "Fondos insuficientes.";
+                                Avanzar(2);
                             }
                         }
                         else
                         {
                             txtMonto.Text = "";
-                            lblRetirarError.Text = "Fondos insuficientes.";
+                            lblError.Text = "El monto debe ser multiplo de 500.";
+                            Avanzar(2);
                         }
                     }
                     else
                     {
                         txtMonto.Text = "";
-                        lblRetirarError.Text = "El monto debe ser multiplo de 500.";
+                        lblError.Text = "El monto maximo es 10.000$.";
+                        Avanzar(2);
                     }
                 }
                 else
                 {
                     txtMonto.Text = "";
-                    lblRetirarError.Text = "El monto maximo es 10.000$.";
+                    lblError.Text = "Monto inválido.";
+                    Avanzar(2);
                 }
             }
             else
             {
-                txtMonto.Text = "";
-                lblRetirarError.Text = "Monto inválido.";
+                lblError.Text = "Debe ingresar un monto.";
+                Avanzar(2);
             }
         }
 
         private void btnRetiroLimpiar_Click(object sender, EventArgs e)
         {
-            Limpiar(4);
+             txtMonto.Text = "";
         }
 
         private void btnRetiroSalir_Click(object sender, EventArgs e)
@@ -507,7 +507,22 @@ namespace Presentacion
         {
             Salir();
         }
-    #endregion
+        #endregion
 
+        private void btnErrorAtras_Click(object sender, EventArgs e)
+        {
+            if (TarjetaValida==false && PinValido==false)
+            {
+                Volver(6);
+            }
+            else if (TarjetaValida == true && PinValido == false)
+            {
+                Volver(5);
+            }
+            else if (TarjetaValida == true && PinValido == true)
+            {
+                Volver(2);
+            }
+        }
     }
 }
